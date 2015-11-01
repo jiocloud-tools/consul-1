@@ -4,7 +4,7 @@ PACKAGES = $(shell go list ./...)
 VETARGS?=-asmdecl -atomic -bool -buildtags -copylocks -methods \
          -nilfunc -printf -rangeloops -shift -structtags -unsafeptr
 VERSION?=$(shell awk -F\" '/^const Version/ { print $$2; exit }' version.go)
-export GOPATH="/build/pkgbuild"
+export GOPATH=/build/pkgbuild
 
 all: deps format
 	@mkdir -p bin/
