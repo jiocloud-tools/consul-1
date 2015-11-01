@@ -4,7 +4,7 @@ PACKAGES = $(shell go list ./...)
 VETARGS?=-asmdecl -atomic -bool -buildtags -copylocks -methods \
          -nilfunc -printf -rangeloops -shift -structtags -unsafeptr
 VERSION?=$(shell awk -F\" '/^const Version/ { print $$2; exit }' version.go)
-export GOPATH=/usr/lib/go
+export GOPATH=/usr/lib/gopath
 
 all: deps format
 	@mkdir -p bin/
@@ -28,6 +28,7 @@ cov:
 
 deps:
 	@echo "--> Installing build dependencies"
+	@mkdir -p /usr/lib/gopath
 	@apt-get install -y git
 	@go get -v $(GOTOOLS)
 	@go get -d -v ./... $(DEPS)
