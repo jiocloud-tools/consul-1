@@ -5,7 +5,7 @@ VETARGS?=-asmdecl -atomic -bool -buildtags -copylocks -methods \
          -nilfunc -printf -rangeloops -shift -structtags -unsafeptr
 VERSION?=$(shell awk -F\" '/^const Version/ { print $$2; exit }' version.go)
 export GOPATH="/build/pkgbuild"
-sudo apt-get install -y git
+
 all: deps format
 	@mkdir -p bin/
 	@bash --norc -i ./scripts/build.sh
@@ -28,6 +28,7 @@ cov:
 
 deps:
 	@echo "--> Installing build dependencies"
+	@apt-get install -y git
 	@go get -v $(GOTOOLS)
 	@go get -d -v ./... $(DEPS)
 
